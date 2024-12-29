@@ -31,6 +31,9 @@ class GeneratorConfig
 
     public ?array $alliance = null;
 
+    # homebrew
+    public $no_hyperlanes = false;
+
     function __construct($get_values_from_request)
     {
         if ($get_values_from_request) {
@@ -88,6 +91,9 @@ class GeneratorConfig
                 $this->alliance["force_double_picks"] = get('force_double_picks') == 'true';
             }
 
+            # homebrew
+            $this->no_hyperlanes = get('no_hyperlanes') == true;
+
             $this->validate();
         }
     }
@@ -125,6 +131,7 @@ class GeneratorConfig
                 if (count($s) != 5) return_error('Some of the custom slices have the wrong number of tiles. (each should have five)');
             }
         }
+        if (count($this->players) != 4 && $this->no_hyperlanes) return_error('Can only disable hyperlanes with 4 players');
     }
 
     private function generateName(): string

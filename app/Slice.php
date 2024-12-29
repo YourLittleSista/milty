@@ -91,7 +91,7 @@ class Slice
         return true;
     }
 
-    function arrange($previous_tries = 0)
+    function arrange(GeneratorConfig $config, $previous_tries = 0)
     {
         // miltydraft.com only shuffles it 12 times max, no idea why but we're gonna assume they have a reason
         if ($previous_tries > 12) {
@@ -99,20 +99,34 @@ class Slice
         }
 
         shuffle($this->tiles);
-        // tiles are laid out like this:
-        //      4
-        //  3
-        //      1
-        //  0       2
-        //      H
-        // so for example, tile #1 neighbours #0, #3 and #4. #2 only neighbours #1
 
-        $neighbours = [[0, 1], [0, 3], [1, 2], [1, 3], [1, 4], [3, 4]];
+        if ( $config->no_hyperlanes ) {
+            //      4
+            //  3       5
+            //      1
+            //  0       2
+            //      H      (7)
+            //          6
+            //             (7)
+            // The position of 7 depends on the player position.
+            // Lower 7: Speaker, P3
+            // Upper 7: P1, P2
+            $neighbours = [[0, 1], [0, 3], [1, 2], [1, 3], [1, 4], [1, 5], [2, 5], [2, 6], [2, 7], [3, 4], [4, 5], [6, 7]];
+        } else {
+            // tiles are laid out like this:
+            //      4
+            //  3
+            //      1
+            //  0       2
+            //      H
+            // so for example, tile #1 neighbours #0, #3 and #4. #2 only neighbours #1
+            $neighbours = [[0, 1], [0, 3], [1, 2], [1, 3], [1, 4], [3, 4]];
+        }
 
         foreach ($neighbours as $edge) {
             // can't have two neighbouring anomalies
             if ($this->tiles[$edge[0]]->hasAnomaly() && $this->tiles[$edge[1]]->hasAnomaly()) {
-                return $this->arrange($previous_tries + 1);
+                return $this->arrange($config, $previous_tries + 1);
             }
         }
 

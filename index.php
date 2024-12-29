@@ -297,6 +297,13 @@
 
                                     <span class="help">The legendaries, in case you were wondering, are Primor and Hope's end.</span>
                                 </div>
+                                <h4>Homebrew</h4>
+                                <div class="input">
+                                    <label for="no_hyperlanes" class="check">
+                                        <input class="no-hyperlanes" type="checkbox" name="no_hyperlanes" id="no_hyperlanes" /> Disable Hyperlanes
+                                    </label>
+                                    <span class="help">Every player get a bigger slice and therefore no hyperlanes are use. This is only available for a 4 person game.</span>
+                                </div>
                             </div>
                         </div>
                     </div>

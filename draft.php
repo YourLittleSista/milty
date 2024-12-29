@@ -346,7 +346,7 @@ $faction_data = json_decode(file_get_contents('data/factions.json'), true);
 
 
                     <div class="mapview current" id="mapview-hyperlane">
-                        <h3 class="map-layout-title">Hyperlane Map</h3>
+                        <h3 class="map-layout-title">(Hyperlane) Map</h3>
                         <div class="map-container">
                             <div class="map-offset">
                                 <div id="map-wrap" class="map">

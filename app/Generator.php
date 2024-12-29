@@ -76,19 +76,35 @@ class Generator
         for ($i = 0; $i < $config->num_slices; $i++) {
             // grab some tiles
 
-            $slice = new Slice([
-                $tiles['high'][$i],
-                $tiles['mid'][$i],
-                $tiles['low'][$i],
-                $tiles['red'][2 * $i],
-                $tiles['red'][(2 * $i) + 1],
-            ]);
+            if ( $config->no_hyperlanes)
+            {
+                $slice = new Slice([
+                    $tiles['high'][$i],
+                    $tiles['mid'][2*$i],
+                    $tiles['mid'][2*$i+1],
+                    $tiles['low'][2*$i],
+                    $tiles['low'][2*$i+1],
+                    $tiles['red'][2 * $i],
+                    $tiles['red'][(2 * $i) + 1],
+                    $tiles['red'][(2 * $i) + 2],
+                ]);
+            }
+            else
+            {
+                $slice = new Slice([
+                    $tiles['high'][$i],
+                    $tiles['mid'][$i],
+                    $tiles['low'][$i],
+                    $tiles['red'][2 * $i],
+                    $tiles['red'][(2 * $i) + 1],
+                ]);
+            }
 
             if (!$slice->validate($config)) {
                 return self::slicesFromTiles($tiles, $config, $previous_tries + 1);
             }
 
-            if ($slice->arrange() == false) {
+            if ($slice->arrange($config) == false) {
                 // impossible slice, retry
                 return self::slicesFromTiles($tiles, $config, $previous_tries + 1);
             }
@@ -122,11 +138,12 @@ class Generator
         shuffle($tiles['low']);
         shuffle($tiles['red']);
 
+        $def_multi = $config->no_hyperlanes ? 2 : 1;
         $selection = [
             'high' => array_slice($tiles["high"], 0, $config->num_slices),
-            'mid' => array_slice($tiles["mid"], 0, $config->num_slices),
-            'low' => array_slice($tiles["low"], 0, $config->num_slices),
-            'red' => array_slice($tiles["red"], 0, $config->num_slices * 2),
+            'mid' => array_slice($tiles["mid"], 0, $config->num_slices * $def_multi),
+            'low' => array_slice($tiles["low"], 0, $config->num_slices * $def_multi),
+            'red' => array_slice($tiles["red"], 0, $config->num_slices * ($def_multi + 1)),
         ];
 
 

@@ -493,7 +493,7 @@ h4 {
     .slice-graph {
         font-size: 3vw;
 
-        width: 5em;
+        width: 9em;
         height: 5em;
 
         position: relative;
@@ -557,6 +557,18 @@ h4 {
         .tile-4 {
             top: -1.73em;
             left: 0;
+        }
+        .tile-5 {
+            top: -0.86em;
+            left: 1.5em;
+        }
+        .tile-6 {
+            top: 2.59em;
+            left: 1.5em;
+        }
+        .tile-7 {
+            top: 1.73em;
+            left: 3.00em;
         }
         .tile-h {
             top: 1.73em;
@@ -760,7 +772,7 @@ h4 {
     .slice {
         position: relative;
         width: 50%;
-        padding-bottom: 50%;
+        padding-bottom: 69%;
         display: inline-block;
     }
 }

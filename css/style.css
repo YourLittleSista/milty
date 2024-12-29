@@ -464,7 +464,7 @@ h4:first-child {
 }
 #draft .slice-graph {
   font-size: 3vw;
-  width: 5em;
+  width: 9em;
   height: 5em;
   position: relative;
 }
@@ -519,6 +519,18 @@ h4:first-child {
 #draft .slice-graph .tile-4 {
   top: -1.73em;
   left: 0;
+}
+#draft .slice-graph .tile-5 {
+  top: -0.86em;
+  left: 1.5em;
+}
+#draft .slice-graph .tile-6 {
+  top: 2.59em;
+  left: 1.5em;
+}
+#draft .slice-graph .tile-7 {
+  top: 1.73em;
+  left: 3.00em;
 }
 #draft .slice-graph .tile-h {
   top: 1.73em;
@@ -716,7 +728,7 @@ h4:first-child {
 #mapslices-wrap .slice {
   position: relative;
   width: 50%;
-  padding-bottom: 50%;
+  padding-bottom: 69%;
   display: inline-block;
 }
 
