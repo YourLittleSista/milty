@@ -105,7 +105,7 @@ $faction_data = json_decode(file_get_contents('data/factions.json'), true);
                             <div class="options">
                                 <?php foreach ($draft->factions() as $f) : ?>
                                     <?php $faction = $faction_data[$f]; ?>
-                                    <?php $homesystem = ($faction['set'] == 'discordant' || $faction['set'] == 'discordantexp') ? 'DS_' . $faction['id'] : $faction['homesystem']; ?>
+                                    <?php $homesystem = $faction['homesystem'] ?>
 
                                     <div class="faction option" data-homesystem="<?= $homesystem ?>" data-faction="<?= $faction['name'] ?>">
                                         <div>
