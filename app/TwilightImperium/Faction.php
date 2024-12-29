@@ -67,10 +67,6 @@ class Faction
      */
     public function homesystem(): string
     {
-        if(in_array($this->edition, [Edition::DISCORDANT_STARS, Edition::DISCORDANT_STARS_PLUS])) {
-            return 'DS_' . $this->id;
-        } else {
-            return $this->homeSystemTileNumber;
-        }
+        return $this->homeSystemTileNumber;
     }
 }
