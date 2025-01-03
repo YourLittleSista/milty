@@ -84,9 +84,9 @@ class Generator
                     $tiles['mid'][2*$i+1],
                     $tiles['low'][2*$i],
                     $tiles['low'][2*$i+1],
-                    $tiles['red'][2 * $i],
-                    $tiles['red'][(2 * $i) + 1],
-                    $tiles['red'][(2 * $i) + 2],
+                    $tiles['red'][3 * $i],
+                    $tiles['red'][(3 * $i) + 1],
+                    $tiles['red'][(3 * $i) + 2],
                 ]);
             }
             else
