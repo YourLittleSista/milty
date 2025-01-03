@@ -449,6 +449,7 @@ h4:first-child {
   position: relative;
   margin: 5px;
   margin-bottom: 20px;
+  width: 48%;
 }
 #draft .slice {
   background-color: rgba(0, 0, 0, 0.05);
