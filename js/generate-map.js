@@ -513,11 +513,11 @@ function lookup(player_index, tile_index) {
                     }
                 }
 
-                return [tile, p.name];
+                return [tile, p.name, p.position];
             }
             else if(p.slice != null) {
                 // huzzah!
-                return [draft.slices[p.slice].tiles[tile_index], p.name];
+                return [draft.slices[p.slice].tiles[tile_index], p.name, p.position];
             }
         }
     }
@@ -532,6 +532,7 @@ function draw_tile(tile) {
     let chunks = tile[2].split('-');
     let label = chunks[0] + "-" + chunks[1];
     let is_hyperlane = false;
+    let color = "";
 
     if(chunks.length == 3 && chunks[0] == "L") {
         // hyperlane
@@ -548,6 +549,7 @@ function draw_tile(tile) {
             tilename = result[0];
             rotation = 0;
             label = result[0];
+            color = result[2];
 
             if(label == "EMPTY") label = (parseInt(chunks[0]) + 1) + "-" + chunks[1];
 
@@ -564,7 +566,7 @@ function draw_tile(tile) {
     if(tile_image.substring(0, 2) != 'DS') tile_image = 'ST_' + tile_image;
     tile_image = window.routes.tile_images + '/' + tile_image;
 
-    let html = '<img src="' + tile_image + '" data-rotate="' + rotation + '" data-q="' + tile[0] +'" data-r="' + tile[1] + '" /><img class="zoom" src="' + tile_image + '" data-rotate="' + rotation + '" data-q="' + tile[0] +'" data-r="' + tile[1] + '" /><span data-q="' + tile[0] +'" data-r="' + tile[1] + '">' + label + '</span>';
+    let html = '<div class="slice-' + color + '" data-rotate="' + rotation + '" data-q="' + tile[0] +'" data-r="' + tile[1] + '" ></div>' + '<img src="' + tile_image + '" data-rotate="' + rotation + '" data-q="' + tile[0] +'" data-r="' + tile[1] + '" /><img class="zoom" src="' + tile_image + '" data-rotate="' + rotation + '" data-q="' + tile[0] +'" data-r="' + tile[1] + '" /><span data-q="' + tile[0] +'" data-r="' + tile[1] + '">' + label + '</span>';
 
     return {
         html: html,

@@ -804,6 +804,37 @@ h4 {
     position: relative;
 
 
+    div {
+        position: absolute;
+        transform: translate(-50%, -50%);
+        clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+        height: 1.75em;
+        width: 2.0em;
+    }
+    .slice-0 {
+        background-color: hsla(0, 100%, 50%, 0.750);
+    }
+    .slice-1 {
+      background-color: rgba(0, 0, 255, 0.750);
+    }
+    .slice-2 {
+      background-color: rgba(0, 0, 0, 0.750);
+    }
+    .slice-3 {
+      background-color: rgba(0, 128, 0, 0.750);
+    }
+    .slice-4 {
+      background-color: rgba(255, 166, 0, 0.750);
+    }
+    .slice-5 {
+      background-color: rgba(128, 0, 128, 0.750);
+    }
+    .slice-6 {
+      background-color: rgba(255, 255, 0, 0.750);
+    }
+    .slice-7 {
+      background-color: rgba(255, 192, 203, 0.750);
+    }
     span {
         color: $color-background;
         position: absolute;
@@ -816,9 +847,10 @@ h4 {
         text-shadow: 0px 0px 8px rgba(0, 0, 0, 0.8);
     }
     img {
-        width: 2em;
+        width: 1.95em;
         position: absolute;
         transform: translate(-50%, -50%);
+        clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
 
         &.zoom {
             width: 300px;
