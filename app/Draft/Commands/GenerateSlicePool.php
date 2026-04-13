@@ -98,7 +98,7 @@ class GenerateSlicePool implements Command
 
         $this->settings->seed->setForSlices($previousTries);
         $this->gatheredTiles->shuffle();
-        $tilePool = $this->gatheredTiles->slice($this->settings->numberOfSlices);
+        $tilePool = $this->gatheredTiles->slice($this->settings->numberOfSlices, $this->settings->noHyperLanes);
 
         $tilePoolIsValid = $this->validateTileSelection($tilePool->allIds());
 
@@ -116,6 +116,32 @@ class GenerateSlicePool implements Command
         }
     }
 
+    private function createSliceTileList(TilePool $pool, $i = 0): Slice
+    {
+        if ($this->settings->noHyperLanes) {
+            $slice = new Slice([
+                $this->tileData[$pool->highTier[$i]],
+                $this->tileData[$pool->midTier[2*$i]],
+                $this->tileData[$pool->midTier[2*$i+1]],
+                $this->tileData[$pool->lowTier[2*$i]],
+                $this->tileData[$pool->lowTier[2*$i+1]],
+                $this->tileData[$pool->redTier[3 * $i]],
+                $this->tileData[$pool->redTier[(3 * $i) + 1]],
+                $this->tileData[$pool->redTier[(3 * $i) + 2]],
+            ], $this->settings->slicesPerTile);
+        } else {
+            $slice = new Slice([
+                $this->tileData[$pool->highTier[$i]],
+                $this->tileData[$pool->midTier[$i]],
+                $this->tileData[$pool->lowTier[$i]],
+                $this->tileData[$pool->redTier[$i * 2]],
+                $this->tileData[$pool->redTier[($i * 2) + 1]],
+            ], $this->settings->slicesPerTile);
+        }
+
+	return $slice;
+    }
+
     private function makeSlicesFromPool(TilePool $pool, $previousTries = 0): array
     {
         if ($previousTries > self::MAX_SLICES_FROM_SELECTION_TRIES) {
@@ -128,14 +154,7 @@ class GenerateSlicePool implements Command
         $slices = [];
 
         for ($i = 0; $i < $this->settings->numberOfSlices; $i++) {
-            $slice = new Slice([
-                $this->tileData[$pool->highTier[$i]],
-                $this->tileData[$pool->midTier[$i]],
-                $this->tileData[$pool->lowTier[$i]],
-                $this->tileData[$pool->redTier[$i * 2]],
-                $this->tileData[$pool->redTier[($i * 2) + 1]],
-            ]);
-
+            $slice = $this->createSliceTileList($pool, $i);
             $sliceIsValid = $slice->validate(
                 $this->settings->minimumOptimalInfluence,
                 $this->settings->minimumOptimalResources,

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Draft;
 
+use App\Draft\Settings;
+
 class TilePool
 {
     public function __construct(
@@ -26,13 +28,14 @@ class TilePool
         shuffle($this->redTier);
     }
 
-    public function slice(int $numberOfSlices): TilePool
+    public function slice(int $numberOfSlices, bool $noHyperLanes): TilePool
     {
+        $multiplier = ($noHyperLanes ? 2 : 1);
         return new TilePool(
-            array_slice($this->highTier, 0, $numberOfSlices),
-            array_slice($this->midTier, 0, $numberOfSlices),
-            array_slice($this->lowTier, 0, $numberOfSlices),
-            array_slice($this->redTier, 0, $numberOfSlices * 2),
+            array_slice($this->highTier, 0, $numberOfSlices * $multiplier),
+            array_slice($this->midTier, 0, $numberOfSlices * $multiplier),
+            array_slice($this->lowTier, 0, $numberOfSlices * $multiplier),
+            array_slice($this->redTier, 0, $numberOfSlices * ($multiplier + 1)),
         );
     }
 

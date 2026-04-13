@@ -449,6 +449,7 @@ h4:first-child {
   position: relative;
   margin: 5px;
   margin-bottom: 20px;
+  width: 45%;
 }
 #draft .slice {
   background-color: rgba(0, 0, 0, 0.05);
@@ -464,8 +465,8 @@ h4:first-child {
 }
 #draft .slice-graph {
   font-size: 3vw;
-  width: 5em;
-  height: 5em;
+  width: 100%;
+  height: 9em;
   position: relative;
 }
 @media (max-width: 768px) {
@@ -492,7 +493,7 @@ h4:first-child {
 }
 #draft .slice-graph .wrap {
   position: absolute;
-  left: 50%;
+  left: 45%;
   top: 50%;
 }
 #draft .slice-graph .zoom {
@@ -519,6 +520,18 @@ h4:first-child {
 #draft .slice-graph .tile-4 {
   top: -1.73em;
   left: 0;
+}
+#draft .slice-graph .tile-5 {
+  top: -0.86em;
+  left: 1.5em;
+}
+#draft .slice-graph .tile-6 {
+  top:  2.59em;
+  left: 1.5em;
+}
+#draft .slice-graph .tile-7 {
+  top:  1.73em;
+  left: 3.0em;
 }
 #draft .slice-graph .tile-h {
   top: 1.73em;

@@ -35,9 +35,10 @@ class Slice
      */
     function __construct(
         public array $tiles,
+        private readonly int $slicesPerTile,
     ) {
-        // if the slice doesn't have 5 tiles in it, something went awry
-        if (count($this->tiles) != 5) {
+        // if the slice doesn't have the expected number of tiles, something went awry
+        if (count($this->tiles) != $this->slicesPerTile) {
             throw new \Exception('Slice does not have enough tiles');
         }
 
@@ -155,12 +156,31 @@ class Slice
      * so neighbouring anomalies might happen just by virtue of player order and slice choice.
      * But since we can't really do anything about that, we just stop enforce the rule here.
      *
+     * In homebrew no hyper lanes mode we have the following arrangement:
+     *      4
+     *  3       5
+     *      1
+     *  0       2
+     *      H      (7)
+     *          6
+     *             (7)
+     * The position of 7 depends on the player position.
+     * Lower 7: Speaker, P3
+     * Upper 7: P1, P2
+     *
      * @return bool
      */
     public function tileArrangementIsValid(): bool
     {
 
-        $neighbours = [[0, 1], [0, 3], [1, 2], [1, 3], [1, 4], [3, 4]];
+        if (count($this->tiles) == 5) {
+            $neighbours = [[0, 1], [0, 3], [1, 2], [1, 3], [1, 4], [3, 4]];
+        } elseif (count($this->tiles) == 8) {
+            $neighbours = [[0, 1], [0, 3], [1, 2], [1, 3], [1, 4], [1, 5], [2, 5], [2, 6], [2, 7], [3, 4], [4, 5], [6, 7]];
+        } else {
+            // if it's not 5 or 8 tiles, we don't know how to validate it, so just return false
+            return true;
+        }
 
         foreach ($neighbours as $neighbouringPair) {
             // can't have two neighbouring anomalies

@@ -45,7 +45,7 @@ class Draft
             $players,
             Settings::fromJson($data['config']),
             Secrets::fromJson($data['secrets']),
-            self::slicesFromJson($data['slices']),
+            self::slicesFromJson($data['slices'], $data['config']['homebrew']['slices_per_tile']),
             self::factionsFromJson($data['factions']),
             array_map(fn ($logData) => Pick::fromJson($logData), $data['draft']['log']),
             $data['draft']['current'] != null ? PlayerId::fromString($data['draft']['current']) : null,
@@ -55,7 +55,7 @@ class Draft
     /**
      * @return array<Slice>
      */
-    private static function slicesFromJson($slicesData): array
+    private static function slicesFromJson($slicesData, $slicesPerTile): array
     {
         $allTiles = Tile::all();
 
@@ -65,7 +65,7 @@ class Draft
                 $sliceData['tiles'],
             );
 
-            return new Slice($tiles);
+            return new Slice($tiles, ($slicesPerTile ?? 5));
         }, $slicesData);
     }
 

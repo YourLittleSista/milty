@@ -49,7 +49,17 @@ class Settings
         public ?AllianceTeamMode $allianceTeamMode = null,
         public ?AllianceTeamPosition $allianceTeamPosition = null,
         public ?bool $allianceForceDoublePicks = null,
+
+	// homebrew
+        public bool $noHyperLanes = true,
+        public int $slicesPerTile = 5,
     ) {
+        if (count($this->playerNames) != 4 && $this->noHyperLanes) {
+            throw new \Exception('No Hyper Lanes homebrew rule can only be used with 4 players');
+        }
+        if ($this->noHyperLanes) {
+            $this->slicesPerTile = 8;
+        }
     }
 
     public function includesFactionSet(Edition $e): bool {
@@ -100,6 +110,10 @@ class Settings
                 'alliance_teams_position' => $this->allianceTeamPosition->value,
                 'force_double_picks' => $this->allianceForceDoublePicks,
             ] : null,
+	    'homebrew' => [
+                'no_hyper_lanes' => $this->noHyperLanes,
+                'slices_per_tile' => $this->slicesPerTile,
+	    ]
         ];
     }
 
@@ -238,6 +252,8 @@ class Settings
             $allianceMode ? AllianceTeamMode::from($data['alliance']['alliance_teams']) : null,
             $allianceMode ? AllianceTeamPosition::from($data['alliance']['alliance_teams_position']) : null,
             $allianceMode ? (bool) $data['alliance']['force_double_picks'] : null,
+            $data['homebrew']['no_hyper_lanes'] ?? false,
+            $data['homebrew']['slices_per_tile'] ?? 5,
         );
     }
 
@@ -326,6 +342,7 @@ class Settings
             $this->allianceTeamMode,
             $this->allianceTeamPosition,
             $this->allianceForceDoublePicks,
+            $this->noHyperLanes,
         );
 
     }

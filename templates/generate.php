@@ -317,6 +317,13 @@
                                 <input type="text" value="0" placeholder="Minimum amount of legendary planets" max="7" name="min_legendaries" id="min_legendaries" />
                                 <span class="help">PoK and TE include <a target="_blank" href="https://twilight-imperium.fandom.com/wiki/Planets_and_Systems#Legendary_Planets">2 and 5 draftable legendary planets, respectively</a>. <br /> Discordant Stars has <a href="https://twilight-imperium.fandom.com/wiki/Uncharted_Space_Expansion_(UNOFFICIAL)#Legendary_Planets" target="_blank">5 more</a></span>
                             </div>
+                            <h4>Homebrew</h4>
+                            <div class="input">
+                                <label for="no_hyper_lanes" class="check">
+                                    <input type="checkbox" name="no_hyper_lanes" id="no_hyper_lanes" class="no-hyper-lanes" checked value="1"/> Disable Hyperlanes
+                                </label>
+                                <span class="help">Every player get a bigger slice and therefore no hyperlanes are use. This is only available for a 4 person game.</span>
+                            </div>
                         </div>
                     </div>
                 </div>

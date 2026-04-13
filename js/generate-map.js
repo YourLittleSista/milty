@@ -13,11 +13,11 @@ let HEX_HEIGHT = HEX_SIZE * Math.sqrt(3);
  */
 
 // map coordinates are built up like this: q, r, value
-    // value is player index + tile index, so
-    // 0-H is the 1st player's home system
-    // M is mecatol rex
-    // 3-4 is the 5th tile in the 4th player's slice
-    // L-S-1 is the straight [S] hyperlane [L] rotated 1 times (= 60 degrees) (yeah, messy, I'm aware)
+// value is player index + tile index, so
+// 0-H is the 1st player's home system
+// M is mecatol rex
+// 3-4 is the 5th tile in the 4th player's slice
+// L-S-1 is the straight [S] hyperlane [L] rotated 1 times (= 60 degrees) (yeah, messy, I'm aware)
 
 const HYPERLANES = {
     "S": "83A",
@@ -119,6 +119,52 @@ const MAP_4 = [
     [-2, 3, "3-2"],
     [-1, 3, "2-0"],
     [0, 3, "2-H"],
+];
+
+const MAP_46 = [
+    [0, -3, "0-0"],
+    [1, -3, "0-3"],
+    [2, -3, "0-7"],
+    [3, -3, "0-6"],
+
+    [-1, -2, "0-H"],
+    [0, -2, "0-1"],
+    [1, -2, "0-4"],
+    [2, -2, "1-2"],
+    [3, -2, "1-H"],
+
+    [-2, -1, "0-6"],
+    [-1, -1, "0-2"],
+    [0, -1, "0-5"],
+    [1, -1, "1-5"],
+    [2, -1, "1-1"],
+    [3, -1, "1-0"],
+
+    [-3, 0, "0-7"],
+    [-2, 0, "3-3"],
+    [-1, 0, "3-4"],
+    [0, 0, "M"],
+    [1, 0, "1-4"],
+    [2, 0, "1-3"],
+    [3, 0, "2-7"],
+
+    [-3, 1, "3-0"],
+    [-2, 1, "3-1"],
+    [-1, 1, "3-5"],
+    [0, 1, "2-5"],
+    [1, 1, "2-2"],
+    [2, 1, "2-6"],
+
+    [-3, 2, "3-H"],
+    [-2, 2, "3-2"],
+    [-1, 2, "2-4"],
+    [0, 2, "2-1"],
+    [1, 2, "2-H"],
+
+    [-3, 3, "3-6"],
+    [-2, 3, "3-7"],
+    [-1, 3, "2-3"],
+    [0, 3, "2-0"],
 ];
 
 const MAP_5 = [
@@ -230,13 +276,13 @@ const MAP_7 = [
     [2, -2, "1-1"],
     [3, -2, "1-0"],
 
-    [-3, -1,  "6-H"],
-    [-2, -1,  "6-1"],
-    [-1, -1,  "6-4"],
-    [0, -1,  "L-K-0"],
-    [1, -1,  "1-4"],
-    [2, -1,  "1-3"],
-    [3, -1,  "2-2"],
+    [-3, -1, "6-H"],
+    [-2, -1, "6-1"],
+    [-1, -1, "6-4"],
+    [0, -1, "L-K-0"],
+    [1, -1, "1-4"],
+    [2, -1, "1-3"],
+    [3, -1, "2-2"],
 
     [-3, 0, "6-2"],
     [-2, 0, "5-3"],
